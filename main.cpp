@@ -1,5 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "controller/controller.h"
+#include "model/model.h"
 
 int main(int argc, char *argv[])
 {
@@ -7,9 +11,16 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
+
+    Model *model = new Model;
+    QQmlApplicationEngine *view = new QQmlApplicationEngine;
+    Controller* controller = new Controller(model, view);
+
+    view->rootContext()->setContextProperty("controller",controller);
+
+    controller->load("qrc:/qml/main.qml");
+
+    if (view->rootObjects().isEmpty())
         return -1;
 
     return app.exec();
