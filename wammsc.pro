@@ -1,4 +1,4 @@
-QT += quick
+QT += quick sql
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,7 +14,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     controller/controller.cpp \
-    model/model.cpp
+    model/model.cpp \
+    domain/connection.cpp \
+    domain/sqlquerymodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,4 +35,6 @@ DISTFILES +=
 
 HEADERS += \
     controller/controller.h \
-    model/model.h
+    model/model.h \
+    domain/connection.h \
+    domain/sqlquerymodel.h

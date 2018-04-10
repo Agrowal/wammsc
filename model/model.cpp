@@ -22,3 +22,9 @@ void Model::RegisterDataChangeHandler(DataChangeHandler handler)
 {
     this->event = handler;
 }
+
+SqlQueryModel* Model::getQuery()
+{
+    query.setQuery("SELECT * FROM wammsc_test.firmatowary");
+    return &query;
+}

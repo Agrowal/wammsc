@@ -5,6 +5,8 @@
 #include "controller/controller.h"
 #include "model/model.h"
 
+#include "domain/connection.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -19,6 +21,8 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("controller",controller);
 
     controller->load("qrc:/qml/main.qml");
+
+    Connection* con = Connection::getConnection();
 
     if (view->rootObjects().isEmpty())
         return -1;

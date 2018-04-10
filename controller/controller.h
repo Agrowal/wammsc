@@ -3,6 +3,7 @@
 
 #include "model/model.h"
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 class Controller : public QObject
 {
@@ -15,12 +16,16 @@ public:
     Q_INVOKABLE int getModelData();
     Q_INVOKABLE void changeModelData();
 
+    Q_INVOKABLE SqlQueryModel* getModelQuery();
+    void rootModelQuery();
 
     void load(QString url);
 
 private:
     Model* _model;
     QQmlApplicationEngine* _view;
+
+    bool setRootModelQuery = false;
 
 };
 
