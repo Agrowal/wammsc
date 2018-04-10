@@ -4,7 +4,6 @@ Controller::Controller(Model *model,QQmlApplicationEngine *view)
 {
     this->setModel(model);
     this->setView(view);
-    rootModelQuery();
 }
 
 void Controller::setModel(Model *model)
@@ -25,19 +24,6 @@ int Controller::getModelData()
 void Controller::changeModelData()
 {
     _model->changeData();
-}
-
-SqlQueryModel* Controller::getModelQuery()
-{
-    _model->getQuery();
-}
-
-void Controller::rootModelQuery()
-{
-    if(!setRootModelQuery){
-        _view->rootContext()->setContextProperty("modelQuery",getModelQuery());
-        setRootModelQuery = true;
-    }
 }
 
 void Controller::load(QString url)
