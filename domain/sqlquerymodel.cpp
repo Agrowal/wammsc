@@ -42,3 +42,16 @@ QVariant SqlQueryModel::data(const QModelIndex &index, int role) const
     }
     return value;
 }
+
+
+QStringList SqlQueryModel::userRoleNames() // Return ordered List of user-defined roles
+{
+    QMap<int, QString> res;
+    QHashIterator<int, QByteArray> i(roleNames());
+    while (i.hasNext()) {
+        i.next();
+        if(i.key() > Qt::UserRole)
+            res[i.key()] = i.value();
+    }
+    return res.values();
+}

@@ -4,6 +4,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 
+
+
 ApplicationWindow {
     id: mainWindow
 
@@ -52,6 +54,13 @@ ApplicationWindow {
             text: qsTr("Change model")
             onClicked: buttonClickedHandler()
         }
+
+        Component
+        {
+            id: columnComponent
+            TableViewColumn{width: 100 }
+        }
+
         TableView{
             x: 123
             y: 116
@@ -61,21 +70,33 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
 
             id: list_view1
-            TableViewColumn  {
-                role: "ID"
-                title: "ID"
-                width: 200
+//            TableViewColumn  {
+//                role: "ID"
+//                title: "ID"
+//                width: 200
+//            }
+//            TableViewColumn  {
+//                role: "Nazw"
+//                title: "Nazwa"
+//                width: 100;
+//            }
+//            TableViewColumn  {
+//                role: "NVat"
+//                title: "VAT"
+//                width: 100;
+//            }
+
+            resources: {
+                var roleList = modelQuery.userRoleNames
+                        var temp = []
+                        for(var i=0; i<roleList.length; i++)
+                        {
+                            var role  = roleList[i]
+                            temp.push(columnComponent.createObject(list_view1, { "role": role, "title": role}))
+                        }
+                        return temp
             }
-            TableViewColumn  {
-                role: "Nazw"
-                title: "Nazwa"
-                width: 100;
-            }
-            TableViewColumn  {
-                role: "NVat"
-                title: "VAT"
-                width: 100;
-            }
+
             model: modelQuery
 
         }

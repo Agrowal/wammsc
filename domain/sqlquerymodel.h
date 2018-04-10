@@ -8,6 +8,7 @@
 class SqlQueryModel : public QSqlQueryModel
 {
     Q_OBJECT
+    Q_PROPERTY(QStringList userRoleNames READ userRoleNames CONSTANT)
 public:
     explicit SqlQueryModel(QObject *parent = 0);
 
@@ -15,6 +16,8 @@ public:
     void setQuery(const QSqlQuery &query);
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const {	return m_roleNames;	}
+
+    QStringList userRoleNames();
 
 private:
     void generateRoleNames();
