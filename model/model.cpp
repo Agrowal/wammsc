@@ -25,6 +25,11 @@ void Model::RegisterDataChangeHandler(DataChangeHandler handler)
 
 SqlQueryModel* Model::getQuery()
 {
-    query.setQuery("SELECT * FROM wammsc_test.firmatowary");
-    return &query;
+    _query.setQuery(_queryString);
+    return &_query;
+}
+
+void Model::setQueryString(const QString &value)
+{
+    _queryString = value;
 }

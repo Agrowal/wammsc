@@ -16,10 +16,14 @@ public:
 
     SqlQueryModel* getQuery();
 
+    void setQueryString(const QString &value);
+
 private:
     int _data;
     DataChangeHandler event = nullptr;
-    SqlQueryModel query;
+
+    QString _queryString;
+    SqlQueryModel _query;
 
 };
 

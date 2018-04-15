@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/LoginDialog.qml</file>
+        <file>qml/ProduktyTab.qml</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

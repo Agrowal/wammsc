@@ -32,6 +32,7 @@ SqlQueryModel* Controller::getModelQuery()
     _model->getQuery();
 }
 
+// tego trzeba sie pozbyc - rejestracja typu w qml i przekazywanie wyniku getModelQuery bezposrednio do widoku
 void Controller::rootModelQuery()
 {
     if(!setRootModelQuery){

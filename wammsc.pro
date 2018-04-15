@@ -16,7 +16,10 @@ SOURCES += main.cpp \
     controller/controller.cpp \
     model/model.cpp \
     domain/connection.cpp \
-    domain/sqlquerymodel.cpp
+    domain/sqlquerymodel.cpp \
+    applicationrunner.cpp \
+    controller/mainpagecontroller.cpp \
+    model/mainpagemodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +40,7 @@ HEADERS += \
     controller/controller.h \
     model/model.h \
     domain/connection.h \
-    domain/sqlquerymodel.h
+    domain/sqlquerymodel.h \
+    applicationrunner.h \
+    controller/mainpagecontroller.h \
+    model/mainpagemodel.h

@@ -5,7 +5,8 @@
 #include "controller/controller.h"
 #include "model/model.h"
 
-#include "domain/connection.h"
+#include "applicationrunner.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -13,19 +14,11 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    ApplicationRunner *appRunner = ApplicationRunner::getApplicationRunner();
+    appRunner->load();
 
-    Model *model = new Model;
-    QQmlApplicationEngine *view = new QQmlApplicationEngine;
-    Controller* controller = new Controller(model, view);
-
-    view->rootContext()->setContextProperty("controller",controller);
-
-    controller->load("qrc:/qml/main.qml");
-
-    Connection* con = Connection::getConnection();
-
-    if (view->rootObjects().isEmpty())
-        return -1;
+//    if (view->rootObjects().isEmpty())
+//        return -1;
 
     return app.exec();
 }
