@@ -29,4 +29,6 @@ private:
 
 };
 
+typedef Controller* (_stdcall *CreateControllerFn)(void);
+
 #endif // CONTROLLER_H

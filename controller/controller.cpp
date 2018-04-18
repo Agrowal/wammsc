@@ -19,12 +19,11 @@ void Controller::setView(QQmlApplicationEngine *view)
 
 int Controller::getModelData()
 {
-    return _model->getData();
+    return 0;
 }
 
 void Controller::changeModelData()
 {
-    _model->changeData();
 }
 
 SqlQueryModel* Controller::getModelQuery()

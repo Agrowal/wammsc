@@ -7,6 +7,8 @@ class mainpageModel : public Model
 {
 public:
     mainpageModel();
+
+    static Model* _stdcall Create();
 };
 
 #endif // MAINPAGEMODEL_H

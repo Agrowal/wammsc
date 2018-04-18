@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     domain/sqlquerymodel.cpp \
     applicationrunner.cpp \
     controller/mainpagecontroller.cpp \
-    model/mainpagemodel.cpp
+    model/mainpagemodel.cpp \
+    mvcabstractfactory.cpp \
+    mvcfactory.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,4 +45,6 @@ HEADERS += \
     domain/sqlquerymodel.h \
     applicationrunner.h \
     controller/mainpagecontroller.h \
-    model/mainpagemodel.h
+    model/mainpagemodel.h \
+    mvcabstractfactory.h \
+    mvcfactory.h
