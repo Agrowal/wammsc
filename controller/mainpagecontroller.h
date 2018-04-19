@@ -6,7 +6,7 @@
 class mainPageController : public Controller
 {
 public:
-    mainPageController(QQmlApplicationEngine *view);
+    mainPageController(Model *model,QQmlApplicationEngine *view);
     mainPageController();
 };
 

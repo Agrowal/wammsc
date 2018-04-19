@@ -9,6 +9,8 @@
 
 #include "controller/mainpagecontroller.h"
 
+#include "mvcfactory.h"
+
 class ApplicationRunner
 {
 public:    
@@ -26,6 +28,9 @@ private:
     //Members
     QQmlApplicationEngine *_viewEngine = new QQmlApplicationEngine;
     mainPageController *_controller;
+    Model *_model;
+
+    MvcAbstractFactory* _mvcFactory = MvcFactory::getMvcFactory();
 
 };
 

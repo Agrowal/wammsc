@@ -1,6 +1,6 @@
 #include "mainpagecontroller.h"
 
-mainPageController::mainPageController(QQmlApplicationEngine *view) : Controller(new mainpageModel,view)
+mainPageController::mainPageController(Model *model,QQmlApplicationEngine *view) : Controller(model,view)
 {
     load("qrc:/qml/main.qml");
 }

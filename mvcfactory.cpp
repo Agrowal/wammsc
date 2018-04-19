@@ -17,7 +17,8 @@ Model *MvcFactory::createModel(const QString &modelName)
 {
     FactoryModelMap::iterator it = _factoryModelMap.find(modelName);
     if( it !=_factoryModelMap.end()){
-        return it.value();
+        CreateModelFn CreateModelFnPointer = it.value();
+        return CreateModelFnPointer();
     }
     return NULL;
 }
