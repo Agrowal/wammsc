@@ -17,7 +17,6 @@ void ApplicationRunner::load()
 {
     _model = _mvcFactory->createModel("Mainpage");
     _controller = new mainPageController(_model,_viewEngine);
-    _viewEngine->rootContext()->setContextProperty("controller",_controller);
 }
 
 ApplicationRunner::ApplicationRunner()

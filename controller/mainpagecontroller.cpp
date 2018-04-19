@@ -4,3 +4,8 @@ mainPageController::mainPageController(Model *model,QQmlApplicationEngine *view)
 {
     load("qrc:/qml/main.qml");
 }
+
+Controller* mainPageController::Create()
+{
+    return new mainPageController(new Model, new QQmlApplicationEngine);
+}
