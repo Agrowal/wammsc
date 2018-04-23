@@ -24,6 +24,5 @@ private:
 
 };
 
-typedef Model* (_stdcall *CreateModelFn)();
 
 #endif // MODEL_H

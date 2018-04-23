@@ -9,7 +9,7 @@
 
 #include "controller/mainpagecontroller.h"
 
-#include "mvcfactory.h"
+#include "genericfactory.h"
 
 class ApplicationRunner
 {
@@ -30,7 +30,9 @@ private:
     mainPageController *_controller;
     Model *_model;
 
-    MvcAbstractFactory* _mvcFactory = MvcFactory::getMvcFactory();
+    using ModelFactory = GenericFactory<Model, mainpageModel>;
+    ModelFactory m_modelFactory;
+
 
 };
 
