@@ -7,7 +7,9 @@ class mainPageController : public Controller
 {
 public:
     mainPageController(Model *model,QQmlApplicationEngine *view);
-    mainPageController();
+
+    static Controller* _stdcall Create();
+
 };
 
 #endif // MAINPAGECONTROLLER_H

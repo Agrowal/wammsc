@@ -5,6 +5,7 @@ Controller::Controller(Model *model,QQmlApplicationEngine *view)
     this->setModel(model);
     this->setView(view);
     rootModelQuery();
+    _view->rootContext()->setContextProperty("controller",this);
 }
 
 void Controller::setModel(Model *model)
