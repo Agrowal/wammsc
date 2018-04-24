@@ -22,7 +22,9 @@ SOURCES += main.cpp \
     controller/mainpagecontroller.cpp \
     model/mainpagemodel.cpp \
     factory.cpp \
-    genericfactory.cpp
+    genericfactory.cpp \
+    model/loginmodel.cpp \
+    controller/logincontroller.cpp
 
 RESOURCES += qml.qrc
 
@@ -48,4 +50,6 @@ HEADERS += \
     controller/mainpagecontroller.h \
     model/mainpagemodel.h \
     factory.h \
-    genericfactory.h
+    genericfactory.h \
+    model/loginmodel.h \
+    controller/logincontroller.h

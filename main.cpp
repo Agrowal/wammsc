@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     ApplicationRunner *appRunner = ApplicationRunner::getApplicationRunner();
-    appRunner->load();
+    appRunner->load("Login");
 
 //    if (view->rootObjects().isEmpty())
 //        return -1;

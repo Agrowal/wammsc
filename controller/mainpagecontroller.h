@@ -1,7 +1,6 @@
 #ifndef MAINPAGECONTROLLER_H
 #define MAINPAGECONTROLLER_H
 #include "controller.h"
-#include "model/mainpagemodel.h"
 
 class MainpageController : public Controller
 {

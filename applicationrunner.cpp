@@ -13,10 +13,10 @@ ApplicationRunner *ApplicationRunner::getApplicationRunner()
     return instance;
 }
 
-void ApplicationRunner::load()
+void ApplicationRunner::load(QString newPageName)
 {
-    m_model = ModelFactory::CreateA("Mainpage");
-    m_controller = ControllerFactory::CreateA("Mainpage");
+    m_model = ModelFactory::CreateA(newPageName);
+    m_controller = ControllerFactory::CreateA(newPageName);
 
     m_controller->setModel(m_model);
     m_controller->setView(m_viewEngine);
@@ -28,5 +28,5 @@ void ApplicationRunner::load()
 
 ApplicationRunner::ApplicationRunner()
 {
-
+    m_viewEngine->rootContext()->setContextProperty("ApplicationControl",QVariant::fromValue(this));
 }

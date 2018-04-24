@@ -5,19 +5,23 @@
 #include <QQmlContext>
 
 #include "controller/controller.h"
-#include "model/model.h"
-
 #include "controller/mainpagecontroller.h"
+#include "controller/logincontroller.h"
+
+#include "model/model.h"
+#include "model/mainpagemodel.h"
+#include "model/loginmodel.h"
 
 #include "genericfactory.h"
 
-class ApplicationRunner
+class ApplicationRunner : public QObject
 {
+    Q_OBJECT
 public:    
     // Static access method
     static ApplicationRunner* getApplicationRunner();
 
-    void load();
+    Q_INVOKABLE void load(QString newPageName);
 
 private:
     // Private constructor
@@ -30,10 +34,10 @@ private:
     Controller *m_controller;
     Model *m_model;
 
-    using ModelFactory = GenericFactory<Model, MainpageModel>;
+    using ModelFactory = GenericFactory<Model, MainpageModel, LoginModel>;
     ModelFactory m_modelFactory;
 
-    using ControllerFactory = GenericFactory<Controller, MainpageController>;
+    using ControllerFactory = GenericFactory<Controller, MainpageController, LoginController>;
     ControllerFactory m_controllerFactory;
 
 
