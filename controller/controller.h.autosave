@@ -10,7 +10,6 @@ class Controller : public QObject
     Q_OBJECT
 public:
     Controller();
-//    Controller(Model *model,QQmlApplicationEngine *view);
     void setModel(Model *model);
     void setView(QQmlApplicationEngine *view);
 

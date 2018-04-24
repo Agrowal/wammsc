@@ -15,8 +15,15 @@ ApplicationRunner *ApplicationRunner::getApplicationRunner()
 
 void ApplicationRunner::load()
 {
-    _model = ModelFactory::CreateA("Mainpage");
-    _controller = new mainPageController(_model,_viewEngine);
+    m_model = ModelFactory::CreateA("Mainpage");
+    m_controller = ControllerFactory::CreateA("Mainpage");
+
+    m_controller->setModel(m_model);
+    m_controller->setView(m_viewEngine);
+    m_controller->rootModelQuery();
+    m_controller->rootController();
+    m_controller->load();
+
 }
 
 ApplicationRunner::ApplicationRunner()

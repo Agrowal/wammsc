@@ -3,12 +3,16 @@
 #include "controller.h"
 #include "model/mainpagemodel.h"
 
-class mainPageController : public Controller
+class MainpageController : public Controller
 {
 public:
-    mainPageController(Model *model,QQmlApplicationEngine *view);
+    MainpageController();
 
-    static Controller* _stdcall Create();
+    static auto className() { return "Mainpage"; }
+    virtual void load() override;
+
+private:
+    QString m_url = "qrc:/qml/main.qml";
 
 };
 

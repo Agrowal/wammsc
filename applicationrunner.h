@@ -26,12 +26,15 @@ private:
     static ApplicationRunner* instance;
 
     //Members
-    QQmlApplicationEngine *_viewEngine = new QQmlApplicationEngine;
-    mainPageController *_controller;
-    Model *_model;
+    QQmlApplicationEngine *m_viewEngine = new QQmlApplicationEngine;
+    Controller *m_controller;
+    Model *m_model;
 
-    using ModelFactory = GenericFactory<Model, mainpageModel>;
+    using ModelFactory = GenericFactory<Model, MainpageModel>;
     ModelFactory m_modelFactory;
+
+    using ControllerFactory = GenericFactory<Controller, MainpageController>;
+    ControllerFactory m_controllerFactory;
 
 
 };
