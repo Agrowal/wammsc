@@ -15,17 +15,21 @@ Connection* Connection::getConnection()
 
 QSqlDatabase *Connection::getDb()
 {
-    return &_db;
+    return &m_db;
+}
+
+bool Connection::login(QString userName, QString password)
+{
+    m_db.setUserName(userName);
+    m_db.setPassword(password);
+    return m_db.open();
 }
 
 
 Connection::Connection()
 {
-    _db = QSqlDatabase::addDatabase("QMYSQL");
-    _db.setHostName("www.wammsc.pl");
-    _db.setDatabaseName("wammsc_test");
-    _db.setUserName("wammsc_micek");
-    _db.setPassword("test");
-    _db.setPort(3306);
-    qDebug() << _db.open();
+    m_db = QSqlDatabase::addDatabase("QMYSQL");
+    m_db.setHostName("www.wammsc.pl");
+    m_db.setDatabaseName("wammsc_test");
+    m_db.setPort(3306);
 }

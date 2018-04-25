@@ -1,16 +1,16 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
+import QtQuick.Dialogs 1.1
 
 Window {
     id: loginWindow
 
     function login()
     {
-        return true
-//        var userName = userTextInput.text
-//        var userPass = passTextInput.text
-//        return myBackEnd.login(userName,userPass)
+        var userName = userTextInput.text
+        var userPass = passTextInput.text
+        return PageController.login(userName,userPass)
     }
 
     width: 350
@@ -102,6 +102,9 @@ Window {
                             ApplicationControl.load("Mainpage")
                             loginWindow.close()
                         }
+                        else{
+                            messageDialog.visible = true;
+                        }
                     }
                 }
             }
@@ -109,4 +112,13 @@ Window {
 
     }
 
+    MessageDialog {
+        id: messageDialog
+        title: "Błąd logowania"
+        icon: StandardIcon.Critical
+        text: "Zła nazwa użytkownika lub hasło"
+        onAccepted: {
+            messageDialog.Close
+        }
+    }
 }

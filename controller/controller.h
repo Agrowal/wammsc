@@ -4,6 +4,7 @@
 #include "model/model.h"
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <memory>
 
 class Controller : public QObject
 {
@@ -13,21 +14,20 @@ public:
     void setModel(Model *model);
     void setView(QQmlApplicationEngine *view);
 
-    Q_INVOKABLE int getModelData();
-    Q_INVOKABLE void changeModelData();
+//    Q_INVOKABLE int getModelData();
+//    Q_INVOKABLE void changeModelData();
 
-    Q_INVOKABLE SqlQueryModel* getModelQuery();
     void rootModelQuery();
-    void rootController();
 
     virtual void load() =0;
+    virtual void rootController() =0;
 
 protected:
     Model* _model;
     QQmlApplicationEngine* _view;
 
     bool setRootModelQuery = false;
-
+    const QString qmlControllerName = "PageController";
 };
 
 #endif // CONTROLLER_H

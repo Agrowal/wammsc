@@ -7,8 +7,8 @@ Item {
     id: firstTab
 
     function buttonClickedHandler() {
-        controller.changeModelData();
-        text2.text = controller.getModelData();
+//        controller.changeModelData();
+//        text2.text = controller.getModelData();
     }
 
     anchors.fill: parent

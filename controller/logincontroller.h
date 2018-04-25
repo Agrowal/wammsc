@@ -4,11 +4,15 @@
 
 class LoginController : public Controller
 {
+    Q_OBJECT
 public:
     LoginController();
 
     static auto className() { return "Login"; }
-    virtual void load() override;
+    void load() override;
+    void rootController() override;
+
+    Q_INVOKABLE bool login(QString userName, QString password);
 
 private:
     QString m_url = "qrc:/qml/LoginDialog.qml";

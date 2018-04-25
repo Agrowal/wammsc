@@ -20,6 +20,7 @@ public:
     QSqlDatabase* getDb();
 
     void openDB();
+    bool login(QString userName, QString password);
 
 private:
     // Private constructor
@@ -27,7 +28,7 @@ private:
     // Instance stored
     static Connection* instance;
 
-    QSqlDatabase _db;
+    QSqlDatabase m_db;
     //User m_user;
 };
 #endif // CONNECTION_H

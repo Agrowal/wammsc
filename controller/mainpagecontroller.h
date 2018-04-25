@@ -8,7 +8,8 @@ public:
     MainpageController();
 
     static auto className() { return "Mainpage"; }
-    virtual void load() override;
+    void load() override;
+    void rootController() override;
 
 private:
     QString m_url = "qrc:/qml/main.qml";
