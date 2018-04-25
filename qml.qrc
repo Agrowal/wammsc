@@ -3,6 +3,7 @@
         <file>qml/main.qml</file>
         <file>qml/LoginDialog.qml</file>
         <file>qml/ProduktyTab.qml</file>
+        <file>images/login_avatar.jpg</file>
     </qresource>
     <qresource prefix="/images"/>
 </RCC>

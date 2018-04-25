@@ -1,10 +1,7 @@
 #include "controller.h"
 
-Controller::Controller(Model *model,QQmlApplicationEngine *view)
+Controller::Controller()
 {
-    this->setModel(model);
-    this->setView(view);
-    rootModelQuery();
 }
 
 void Controller::setModel(Model *model)
@@ -17,31 +14,23 @@ void Controller::setView(QQmlApplicationEngine *view)
     _view = view;
 }
 
-int Controller::getModelData()
-{
-    return _model->getData();
-}
+//int Controller::getModelData()
+//{
+//    return 0;
+//}
 
-void Controller::changeModelData()
-{
-    _model->changeData();
-}
-
-SqlQueryModel* Controller::getModelQuery()
-{
-    _model->getQuery();
-}
+//void Controller::changeModelData()
+//{
+//}
 
 // tego trzeba sie pozbyc - rejestracja typu w qml i przekazywanie wyniku getModelQuery bezposrednio do widoku
 void Controller::rootModelQuery()
 {
     if(!setRootModelQuery){
-        _view->rootContext()->setContextProperty("modelQuery",getModelQuery());
+        SqlQueryModel* ptrQuery = _model->getQuery();
+        _view->rootContext()->setContextProperty("modelQuery",ptrQuery);
         setRootModelQuery = true;
     }
 }
 
-void Controller::load(QString url)
-{
-    _view->load(QUrl(url));
-}
+

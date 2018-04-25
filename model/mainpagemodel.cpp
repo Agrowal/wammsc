@@ -1,6 +1,7 @@
 #include "mainpagemodel.h"
 
-mainpageModel::mainpageModel()
+MainpageModel::MainpageModel()
 {
-   setQueryString("SELECT * FROM wammsc_test.firmatowary");
+    setQueryString("SELECT * FROM wammsc_test.firmatowary");
 }
+

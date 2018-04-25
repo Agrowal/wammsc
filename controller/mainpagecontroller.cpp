@@ -1,6 +1,15 @@
 #include "mainpagecontroller.h"
 
-mainPageController::mainPageController(QQmlApplicationEngine *view) : Controller(new mainpageModel,view)
+MainpageController::MainpageController()
 {
-    load("qrc:/qml/main.qml");
+}
+
+void MainpageController::load()
+{
+    _view->load(QUrl(m_url));
+}
+
+void MainpageController::rootController()
+{
+    _view->rootContext()->setContextProperty(qmlControllerName,QVariant::fromValue(this));
 }

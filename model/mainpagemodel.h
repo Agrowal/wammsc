@@ -3,10 +3,12 @@
 
 #include "model.h"
 
-class mainpageModel : public Model
+class MainpageModel : public Model
 {
 public:
-    mainpageModel();
+    MainpageModel();
+
+    static auto className() { return "Mainpage"; }
 };
 
 #endif // MAINPAGEMODEL_H

@@ -1,13 +1,19 @@
 #ifndef MAINPAGECONTROLLER_H
 #define MAINPAGECONTROLLER_H
 #include "controller.h"
-#include "model/mainpagemodel.h"
 
-class mainPageController : public Controller
+class MainpageController : public Controller
 {
 public:
-    mainPageController(QQmlApplicationEngine *view);
-    mainPageController();
+    MainpageController();
+
+    static auto className() { return "Mainpage"; }
+    void load() override;
+    void rootController() override;
+
+private:
+    QString m_url = "qrc:/qml/main.qml";
+
 };
 
 #endif // MAINPAGECONTROLLER_H

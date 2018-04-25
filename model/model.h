@@ -9,13 +9,10 @@ class Model
 {
 public:
     Model();
-    int getData();
-    void changeData();
 
     void RegisterDataChangeHandler(DataChangeHandler handler);
 
     SqlQueryModel* getQuery();
-
     void setQueryString(const QString &value);
 
 private:
@@ -26,5 +23,6 @@ private:
     SqlQueryModel _query;
 
 };
+
 
 #endif // MODEL_H
