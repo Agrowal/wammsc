@@ -13,13 +13,13 @@ Item {
 
     anchors.fill: parent
 
-    Text {
-        id: text2
-        x: 113
-        y: 11
-        text: controller.getModelData()
-        font.pixelSize: 12
-    }
+//    Text {
+//        id: text2
+//        x: 113
+//        y: 11
+//        text: controller.getModelData()
+//        font.pixelSize: 12
+//    }
     
     
     Button {

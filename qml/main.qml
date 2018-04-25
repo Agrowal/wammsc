@@ -44,7 +44,7 @@ ApplicationWindow {
     statusBar: StatusBar {
         RowLayout {
             anchors.fill: parent
-            Label {text: "Aplikacja WAMM SC. Użytkownik: "}
+            Label {text: "Aplikacja WAMM SC. Użytkownik: "+PageController.getUserName()}
         }
     }
 

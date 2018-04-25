@@ -13,3 +13,8 @@ void MainpageController::rootController()
 {
     _view->rootContext()->setContextProperty(qmlControllerName,QVariant::fromValue(this));
 }
+
+QString MainpageController::getUserName()
+{
+    return Connection::getConnection()->getDb()->userName();
+}

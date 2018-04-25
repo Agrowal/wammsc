@@ -4,12 +4,15 @@
 
 class MainpageController : public Controller
 {
+    Q_OBJECT
 public:
     MainpageController();
 
     static auto className() { return "Mainpage"; }
     void load() override;
     void rootController() override;
+
+    Q_INVOKABLE QString getUserName();
 
 private:
     QString m_url = "qrc:/qml/main.qml";
