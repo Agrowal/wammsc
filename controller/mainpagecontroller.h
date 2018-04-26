@@ -15,6 +15,8 @@ public:
     Q_INVOKABLE QString getUserName();
     Q_INVOKABLE SqlQueryModel *getSqlQuery();
 
+    Q_INVOKABLE QStringList columnList();
+
 private:
     QString m_url = "qrc:/qml/main.qml";
 
