@@ -9,39 +9,9 @@ import io.qt.queryModel 1.0
 Item {
     id: firstTab
 
-    function buttonClickedHandler() {
-//        controller.changeModelData();
-//        text2.text = controller.getModelData();
-    }
-
     property var sqlQueryModel : PageController.getSqlQuery();
 
     anchors.fill: parent
-
-//    Text {
-//        id: text2
-//        x: 113
-//        y: 11
-//        text: controller.getModelData()
-//        font.pixelSize: 12
-//    }
-    
-    
-    Button {
-        id: button
-
-        anchors.left: text2.right
-        anchors.leftMargin: 10
-        anchors.top: parent.top
-        anchors.topMargin: 5
-
-        height: 20
-        width: 100
-
-        text: qsTr("Change model")
-        onClicked: buttonClickedHandler()
-    }
-
 
     Component
     {
@@ -74,7 +44,7 @@ Item {
         //            }
         
         resources: {
-            var roleList = PageController.getSqlQuery().userRoleNames //modelQuery.userRoleNames
+            var roleList = firstTab.sqlQueryModel.userRoleNames
             var temp = []
             for(var i=0; i<roleList.length; i++)
             {
@@ -84,7 +54,7 @@ Item {
             return temp
         }
         
-        model: firstTab.sqlQueryModel //PageController.getSqlQuery(); //modelQuery
+        model: firstTab.sqlQueryModel
     }
 
 
