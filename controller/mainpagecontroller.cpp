@@ -18,3 +18,8 @@ QString MainpageController::getUserName()
 {
     return Connection::getConnection()->getDb()->userName();
 }
+
+SqlQueryModel *MainpageController::getSqlQuery()
+{
+    return _model->getQuery();
+}

@@ -13,6 +13,7 @@ public:
     void rootController() override;
 
     Q_INVOKABLE QString getUserName();
+    Q_INVOKABLE SqlQueryModel *getSqlQuery();
 
 private:
     QString m_url = "qrc:/qml/main.qml";
