@@ -26,21 +26,12 @@ Item {
             MenuItem {text: "Context menu"}
         }
 
-
-
-
-        Component
-        {
-            id: columnComponent
-            TableViewColumn{width: 100 }
-        }
-
         TableView{
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.top: parent.top
-            anchors.topMargin: 50
+            anchors.bottomMargin:50
 
             id: table_view1
             //            TableViewColumn  {
@@ -60,8 +51,8 @@ Item {
             //            }
 
             resources: {
-                //var roleList = firstTab.sqlQueryModel.userRoleNames
-                var roleList = PageController.columnList()
+                var roleList = firstTab.sqlQueryModel.userRoleNames
+                //var roleList = PageController.columnList()
                 var temp = []
                 for(var i=0; i<roleList.length; i++)
                 {
@@ -72,6 +63,12 @@ Item {
             }
 
             model: firstTab.sqlQueryModel
+        }
+
+        Component
+        {
+            id: columnComponent
+            TableViewColumn{width: 100 }
         }
     }
 
