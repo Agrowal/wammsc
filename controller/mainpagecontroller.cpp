@@ -1,5 +1,7 @@
 #include "mainpagecontroller.h"
 
+#include "xlsxdocument.h"
+
 MainpageController::MainpageController()
 {
 }
@@ -42,4 +44,22 @@ QStringList MainpageController::columnList()
 //    return res.values();
 
     return acceptedColumns;
+}
+
+void MainpageController::readFile(QString path)
+{
+    QUrl filePath = QUrl(path);
+    QXlsx::Document doc(filePath.path());
+    QXlsx::CellRange a = doc.dimension();
+
+    for(int r = 1; r<=a.rowCount(); r++){
+        for(int c = 1; c<= a.columnCount(); c++){
+            QXlsx::CellReference cell = QXlsx::CellReference(r,c);
+            qDebug()<<doc.read(cell.toString());
+        }
+    }
+
+    qDebug()<<"dimensions: "<<doc.dimension().toString();
+    qDebug()<<doc.read("A1");
+
 }

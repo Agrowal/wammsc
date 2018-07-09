@@ -1,4 +1,4 @@
-QT += quick sql
+QT += quick sql xlsx
 CONFIG += c++11
 CONFIG += c++14
 
@@ -53,3 +53,5 @@ HEADERS += \
     genericfactory.h \
     model/loginmodel.h \
     controller/logincontroller.h
+
+INCLUDEPATH += excel/xlsx/qtxlsx.pri

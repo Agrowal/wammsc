@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.3
 
 
 
@@ -20,6 +21,11 @@ ApplicationWindow {
             MenuItem {
                 text: "Zmień użytkownika"
                 shortcut: "Ctrl+L"
+            }
+            MenuItem {
+                text: "Importuj plik"
+                shortcut: "Ctrl+I"
+                onTriggered: fileDialog.open()
             }
             MenuSeparator{}
             MenuItem {
@@ -45,6 +51,20 @@ ApplicationWindow {
         RowLayout {
             anchors.fill: parent
             Label {text: "Aplikacja WAMM SC. Użytkownik: "+PageController.getUserName()}
+        }
+    }
+
+    FileDialog {
+        id: fileDialog
+        folder: shortcuts.home
+        onAccepted: {
+            var path = this.fileUrl.toString();
+            // remove prefixed "file:///"
+            path= path.replace(/^(file:\/{3})|(qrc:\/{2})|(http:\/{2})/,"");
+            // unescape html codes like '%23' for '#'
+            var cleanPath = decodeURIComponent(path);
+            //Run controller function
+            PageController.readFile(cleanPath)
         }
     }
 

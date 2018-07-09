@@ -17,6 +17,8 @@ public:
 
     Q_INVOKABLE QStringList columnList();
 
+    Q_INVOKABLE void readFile(QString path);
+
 private:
     QString m_url = "qrc:/qml/main.qml";
 

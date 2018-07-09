@@ -90,6 +90,7 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
+                    text: "wammsc_micek"
                 }
 
             }
@@ -105,6 +106,15 @@ Window {
                 anchors.top: userInput.bottom
                 anchors.topMargin: 30
 
+                Label {
+                    id: label1
+                    color: "#ededed"
+                    anchors.left: parent.left
+                    anchors.bottom: parent.top
+                    anchors.bottomMargin: 5
+                    text: qsTr("Hasło:")
+                }
+
                 TextInput {
                     id: passTextInput
                     width: 200
@@ -113,15 +123,6 @@ Window {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
                     echoMode: TextInput.Password
-                }
-
-                Label {
-                    id: label1
-                    color: "#ededed"
-                    anchors.left: parent.left
-                    anchors.bottom: parent.top
-                    anchors.bottomMargin: 5
-                    text: qsTr("Hasło:")
                 }
             }
 
