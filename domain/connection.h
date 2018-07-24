@@ -21,6 +21,7 @@ public:
 
     void openDB();
     bool login(QString userName, QString password);
+    bool login(QString userName, QString password, QString dbName);
 
 private:
     // Private constructor

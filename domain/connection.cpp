@@ -25,6 +25,14 @@ bool Connection::login(QString userName, QString password)
     return m_db.open();
 }
 
+bool Connection::login(QString userName, QString password, QString dbName)
+{
+    m_db.setDatabaseName(dbName);
+    m_db.setUserName(userName);
+    m_db.setPassword(password);
+    return m_db.open();
+}
+
 
 Connection::Connection()
 {

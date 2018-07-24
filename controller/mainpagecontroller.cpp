@@ -52,14 +52,58 @@ void MainpageController::readFile(QString path)
     QXlsx::Document doc(filePath.path());
     QXlsx::CellRange a = doc.dimension();
 
-    for(int r = 1; r<=a.rowCount(); r++){
+    const char * sqlQueryString = R"SQL(
+                             insert into firmaewid (IDe,IDzzs,IDp,Ro,ce,Okaz,str1,Akt,Anul) values
+                             (
+                                 concat('WG.',:KOD_TOWARU_SKLADOWEGO,(select UNIX_TIMESTAMP(sysdate())))
+                                 ,(select t.ID from firmatowary t where t.Kod = :KOD_TOWARU)
+                                 ,:KOD_TOWARU_SKLADOWEGO
+                                 ,'sklad'
+                                 ,:ILOSC
+                                 ,(select a.Nazw from firmatowary a where a.Kod = :KOD_TOWARU_SKLADOWEGO)
+                                 ,:MAGAZYN
+                                 ,'T'
+                                 ,'N'
+                             )
+                             )SQL";
+
+
+    QString KOD_TOWARU;
+    QString KOD_TOWARU_SKLADOWEGO;
+    QString ILOSC;
+    QString MAGAZYN;
+
+
+    for(int r = 2; r<=a.rowCount(); r++){
         for(int c = 1; c<= a.columnCount(); c++){
-            QXlsx::CellReference cell = QXlsx::CellReference(r,c);
-            qDebug()<<doc.read(cell.toString());
+            //QXlsx::Cell cell = QXlsx::CellReference(r,c);
+            QXlsx::Cell* cell = doc.cellAt(r, c);
+
+            //qDebug()<<cell->value().toString();
+            switch(c){
+            case 1:
+                KOD_TOWARU = cell->value().toString();
+                break;
+            case 2:
+                KOD_TOWARU_SKLADOWEGO = cell->value().toString();
+                break;
+            case 3:
+                ILOSC = cell->value().toString();
+                break;
+            case 4:
+                MAGAZYN = cell->value().toString();
+                break;
+            }
         }
+        qDebug()<<KOD_TOWARU<<" "<<KOD_TOWARU_SKLADOWEGO<<" "<<ILOSC<<" "<<MAGAZYN;
+        QSqlQuery insertRowQuery;
+        insertRowQuery.prepare(sqlQueryString);
+        insertRowQuery.bindValue(0,KOD_TOWARU_SKLADOWEGO);
+        insertRowQuery.bindValue(1,KOD_TOWARU);
+        insertRowQuery.bindValue(2,KOD_TOWARU_SKLADOWEGO);
+        insertRowQuery.bindValue(3,ILOSC);
+        insertRowQuery.bindValue(4,KOD_TOWARU_SKLADOWEGO);
+        insertRowQuery.bindValue(5,MAGAZYN);
+        insertRowQuery.exec();
     }
-
-    qDebug()<<"dimensions: "<<doc.dimension().toString();
-    qDebug()<<doc.read("A1");
-
 }

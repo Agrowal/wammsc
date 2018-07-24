@@ -10,9 +10,10 @@ Window {
 
     function login()
     {
+        var dbName = dbTextInput.text
         var userName = userTextInput.text
         var userPass = passTextInput.text
-        return PageController.login(userName,userPass)
+        return PageController.login(userName,userPass, dbName)
     }
 
     width: 350
@@ -64,6 +65,37 @@ Window {
             }
 
             Rectangle{
+                id: dbInput
+                color: "#ded8d8"
+                height: dbTextInput.height+5
+                width: dbTextInput.width+20
+                radius: 5
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: avatarImage.bottom
+                anchors.topMargin: 65
+
+                Label {
+                    id: label2
+                    color: "#ededed"
+                    anchors.left: parent.left
+                    anchors.bottom: parent.top
+                    anchors.bottomMargin: 5
+                    text: qsTr("Baza:")
+                }
+
+                TextInput {
+                    id: dbTextInput
+                    width: 200
+                    height: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 12
+                    text: "wammsc"
+                }
+
+            }
+            Rectangle{
                 id: userInput
                 color: "#ded8d8"
                 height: userTextInput.height+5
@@ -71,8 +103,8 @@ Window {
                 radius: 5
 
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: avatarImage.bottom
-                anchors.topMargin: 65
+                anchors.top: dbInput.bottom
+                anchors.topMargin: 30
 
                 Label {
                     id: label
@@ -90,7 +122,7 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
-                    text: "wammsc_micek"
+                    //text: "wammsc_micek"
                 }
 
             }

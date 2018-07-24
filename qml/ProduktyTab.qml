@@ -31,7 +31,7 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.top: parent.top
-            anchors.bottomMargin:50
+            //anchors.bottomMargin:50
 
             id: table_view1
             //            TableViewColumn  {
