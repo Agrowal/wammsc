@@ -7,12 +7,18 @@ class FileImporter
 {
 public:
     FileImporter();
-    bool checkWarehouse(QString magazyn);
-    bool checkIndex(QString kod_towaru);
-    bool checkAmount(QString ilosc);
-    bool checkIfAlreadyExists(QString kod_towaru);
+    bool warehouseOk(QString magazyn);
+    bool indexOk(QString kod_towaru);
+    bool amountOk(QString ilosc);
+    bool techAlreadExists(QString kod_towaru);
 
     bool importRow(QString KOD_TOWARU,QString KOD_TOWARU_SKLADOWEGO, QString ILOSC, QString MAGAZYN);
+
+    int getErrorCode() const;
+
+private:
+    int _errorCode;
+    QString _indexAlreadyChecked = "";
 };
 
 #endif // FILEIMPORTER_H

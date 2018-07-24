@@ -46,27 +46,11 @@ QStringList MainpageController::columnList()
     return acceptedColumns;
 }
 
-bool MainpageController::readFile(QString path)
+int MainpageController::readFile(QString path)
 {
     QUrl filePath = QUrl(path);
     QXlsx::Document doc(filePath.path());
     QXlsx::CellRange a = doc.dimension();
-
-    const char * sqlQueryString = R"SQL(
-                             insert into firmaewid (IDe,IDzzs,IDp,Ro,ce,Okaz,str1,Akt,Anul) values
-                             (
-                                 concat('WG.',:KOD_TOWARU_SKLADOWEGO,(select UNIX_TIMESTAMP(sysdate())))
-                                 ,(select t.ID from firmatowary t where t.Kod = :KOD_TOWARU)
-                                 ,:KOD_TOWARU_SKLADOWEGO
-                                 ,'sklad'
-                                 ,:ILOSC
-                                 ,(select a.Nazw from firmatowary a where a.Kod = :KOD_TOWARU_SKLADOWEGO)
-                                 ,:MAGAZYN
-                                 ,'T'
-                                 ,'N'
-                             )
-                             )SQL";
-
 
     QString KOD_TOWARU;
     QString KOD_TOWARU_SKLADOWEGO;
@@ -74,16 +58,12 @@ bool MainpageController::readFile(QString path)
     QString MAGAZYN;
 
     FileImporter import;
-    bool parametersSet;
 
-
-    qDebug() << a.rowCount();
     for(int r = 2; r<=a.rowCount(); r++){
         for(int c = 1; c<= a.columnCount(); c++){
             //QXlsx::Cell cell = QXlsx::CellReference(r,c);
             QXlsx::Cell* cell = doc.cellAt(r, c);
 
-            //qDebug()<<cell->value().toString();
             switch(c){
             case 1:
                 KOD_TOWARU = cell->value().toString();
@@ -100,25 +80,17 @@ bool MainpageController::readFile(QString path)
             }
         }
 
-        if(import.checkIndex(KOD_TOWARU) && import.checkIndex(KOD_TOWARU_SKLADOWEGO)){
-               parametersSet = true;
-        }
-        else{
-            parametersSet = false;
-        }
-
         qDebug()<<KOD_TOWARU<<" "<<KOD_TOWARU_SKLADOWEGO<<" "<<ILOSC<<" "<<MAGAZYN;
-        if(parametersSet){
-            QSqlQuery insertRowQuery;
-            insertRowQuery.prepare(sqlQueryString);
-            insertRowQuery.bindValue(0,KOD_TOWARU_SKLADOWEGO);
-            insertRowQuery.bindValue(1,KOD_TOWARU);
-            insertRowQuery.bindValue(2,KOD_TOWARU_SKLADOWEGO);
-            insertRowQuery.bindValue(3,ILOSC);
-            insertRowQuery.bindValue(4,KOD_TOWARU_SKLADOWEGO);
-            insertRowQuery.bindValue(5,MAGAZYN);
-            if(!insertRowQuery.exec()){return false;}
+
+        Connection::getConnection()->getDb()->transaction();
+        if(!import.importRow(KOD_TOWARU,KOD_TOWARU_SKLADOWEGO,ILOSC,MAGAZYN)){
+            //rollback
+            Connection::getConnection()->getDb()->rollback();
+            qDebug()<<import.getErrorCode();
+            return import.getErrorCode();
         }
     }
-    return true;
+    //commit
+    Connection::getConnection()->getDb()->commit();
+    return 0;
 }

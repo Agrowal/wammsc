@@ -5,12 +5,12 @@ FileImporter::FileImporter()
 
 }
 
-bool FileImporter::checkWarehouse(QString magazyn)
+bool FileImporter::warehouseOk(QString magazyn)
 {
     return true;
 }
 
-bool FileImporter::checkIndex(QString kod_towaru)
+bool FileImporter::indexOk(QString kod_towaru)
 {
     QSqlQuery query;
     query.prepare("select t.ID from firmatowary t where t.Kod = :KOD_TOWARU");
@@ -19,26 +19,29 @@ bool FileImporter::checkIndex(QString kod_towaru)
     while(query.next()){
         return true;
     }
+    _errorCode=1;
     return false;
 }
 
-bool FileImporter::checkAmount(QString ilosc)
-{
-    bool isNumeric;
-    ilosc.toDouble(&isNumeric);
-    return isNumeric;
-}
-
-bool FileImporter::checkIfAlreadyExists(QString kod_towaru)
+bool FileImporter::techAlreadExists(QString kod_towaru)
 {
     QSqlQuery query;
-    query.prepare("select tech.* from firmaewid tech where tech.IDzzs = (select t.ID from firmatowary t where t.Kod = :KOD_TOWARU)");
+    query.prepare("select tech.* from firmaewid tech where tech.IDzzs = (select t.ID from firmatowary t where t.Kod = :KOD_TOWARU) and tech.Anul = 'N'");
     query.bindValue(0,kod_towaru);
     query.exec();
     while(query.next()){
-        return false;
+        return true;
     }
-    return true;
+    _errorCode=2;
+    return false;
+}
+
+bool FileImporter::amountOk(QString ilosc)
+{
+    bool isNumeric;
+    ilosc.toDouble(&isNumeric);
+    if(!isNumeric){_errorCode=3;}
+    return isNumeric;
 }
 
 bool FileImporter::importRow(QString KOD_TOWARU, QString KOD_TOWARU_SKLADOWEGO, QString ILOSC, QString MAGAZYN)
@@ -57,7 +60,15 @@ bool FileImporter::importRow(QString KOD_TOWARU, QString KOD_TOWARU_SKLADOWEGO, 
                                  ,'N'
                              )
                              )SQL";
-    if(checkIndex(KOD_TOWARU) && checkIndex(KOD_TOWARU_SKLADOWEGO) && checkIfAlreadyExists(KOD_TOWARU) && checkAmount(ILOSC)){
+
+    if(!indexOk(KOD_TOWARU)){return false;}
+    if(!indexOk(KOD_TOWARU_SKLADOWEGO)){return false;}
+    if(!(_indexAlreadyChecked==KOD_TOWARU)){
+        _indexAlreadyChecked=KOD_TOWARU;
+        if(techAlreadExists(KOD_TOWARU)){return false;}
+    }
+    if(!amountOk(ILOSC)){return false;}
+
         QSqlQuery insertRowQuery;
         insertRowQuery.prepare(sqlQueryString);
         insertRowQuery.bindValue(0,KOD_TOWARU_SKLADOWEGO);
@@ -67,6 +78,9 @@ bool FileImporter::importRow(QString KOD_TOWARU, QString KOD_TOWARU_SKLADOWEGO, 
         insertRowQuery.bindValue(4,KOD_TOWARU_SKLADOWEGO);
         insertRowQuery.bindValue(5,MAGAZYN);
         return insertRowQuery.exec();
-    }
-    return false;
+}
+
+int FileImporter::getErrorCode() const
+{
+    return _errorCode;
 }
