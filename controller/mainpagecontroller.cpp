@@ -46,7 +46,7 @@ QStringList MainpageController::columnList()
     return acceptedColumns;
 }
 
-void MainpageController::readFile(QString path)
+bool MainpageController::readFile(QString path)
 {
     QUrl filePath = QUrl(path);
     QXlsx::Document doc(filePath.path());
@@ -73,7 +73,11 @@ void MainpageController::readFile(QString path)
     QString ILOSC;
     QString MAGAZYN;
 
+    FileImporter import;
+    bool parametersSet;
 
+
+    qDebug() << a.rowCount();
     for(int r = 2; r<=a.rowCount(); r++){
         for(int c = 1; c<= a.columnCount(); c++){
             //QXlsx::Cell cell = QXlsx::CellReference(r,c);
@@ -95,15 +99,26 @@ void MainpageController::readFile(QString path)
                 break;
             }
         }
+
+        if(import.checkIndex(KOD_TOWARU) && import.checkIndex(KOD_TOWARU_SKLADOWEGO)){
+               parametersSet = true;
+        }
+        else{
+            parametersSet = false;
+        }
+
         qDebug()<<KOD_TOWARU<<" "<<KOD_TOWARU_SKLADOWEGO<<" "<<ILOSC<<" "<<MAGAZYN;
-        QSqlQuery insertRowQuery;
-        insertRowQuery.prepare(sqlQueryString);
-        insertRowQuery.bindValue(0,KOD_TOWARU_SKLADOWEGO);
-        insertRowQuery.bindValue(1,KOD_TOWARU);
-        insertRowQuery.bindValue(2,KOD_TOWARU_SKLADOWEGO);
-        insertRowQuery.bindValue(3,ILOSC);
-        insertRowQuery.bindValue(4,KOD_TOWARU_SKLADOWEGO);
-        insertRowQuery.bindValue(5,MAGAZYN);
-        insertRowQuery.exec();
+        if(parametersSet){
+            QSqlQuery insertRowQuery;
+            insertRowQuery.prepare(sqlQueryString);
+            insertRowQuery.bindValue(0,KOD_TOWARU_SKLADOWEGO);
+            insertRowQuery.bindValue(1,KOD_TOWARU);
+            insertRowQuery.bindValue(2,KOD_TOWARU_SKLADOWEGO);
+            insertRowQuery.bindValue(3,ILOSC);
+            insertRowQuery.bindValue(4,KOD_TOWARU_SKLADOWEGO);
+            insertRowQuery.bindValue(5,MAGAZYN);
+            if(!insertRowQuery.exec()){return false;}
+        }
     }
+    return true;
 }

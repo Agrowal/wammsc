@@ -91,7 +91,7 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
-                    text: "wammsc"
+                    text: "wammsc_test"
                 }
 
             }
@@ -122,7 +122,7 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
-                    //text: "wammsc_micek"
+                    text: "wammsc_micek"
                 }
 
             }
@@ -155,6 +155,7 @@ Window {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
                     echoMode: TextInput.Password
+                    text: "test"
                 }
             }
 

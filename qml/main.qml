@@ -64,7 +64,19 @@ ApplicationWindow {
             // unescape html codes like '%23' for '#'
             var cleanPath = decodeURIComponent(path);
             //Run controller function
-            PageController.readFile(cleanPath)
+            var success = PageController.readFile(cleanPath);
+            if(success){
+                successMessageDialog.open()
+            }
+        }
+    }
+
+    MessageDialog {
+        id: successMessageDialog
+        title: "Import technologii"
+        text: "Import zakończony sukcesem!"
+        onAccepted: {
+            console.log("And of course you could only agree.")
         }
     }
 
