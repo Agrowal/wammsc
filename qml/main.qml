@@ -64,7 +64,7 @@ ApplicationWindow {
             var cleanPath = decodeURIComponent(path);
             //Run controller function
             var readFileCode = PageController.readFile(cleanPath);
-            if(readFileCode === 0){
+            if(readFileCode == 0){
                 successMessageDialog.open();
             }else{
                 switch(readFileCode){
@@ -95,7 +95,7 @@ ApplicationWindow {
         }
     }
 
-    property var errorMessageDialogText;
+    property var errorMessageDialogText: "";
 
     MessageDialog {
         id: errorMessageDialog

@@ -7,7 +7,15 @@ FileImporter::FileImporter()
 
 bool FileImporter::warehouseOk(QString magazyn)
 {
-    return true;
+            QSqlQuery query;
+            query.prepare("SELECT ID FROM firmadefs WHERE Pole='MG' and Nazw='mag2' = :MAGAZYN");
+            query.bindValue(0,kod_towaru);
+            query.exec();
+            while(query.next()){
+                return true;
+            }
+            _errorCode=1;
+            return false;
 }
 
 bool FileImporter::indexOk(QString kod_towaru)
@@ -68,6 +76,7 @@ bool FileImporter::importRow(QString KOD_TOWARU, QString KOD_TOWARU_SKLADOWEGO, 
         if(techAlreadExists(KOD_TOWARU)){return false;}
     }
     if(!amountOk(ILOSC)){return false;}
+    if(!warehouseOk(MAGAZYN)){return false;}
 
         QSqlQuery insertRowQuery;
         insertRowQuery.prepare(sqlQueryString);

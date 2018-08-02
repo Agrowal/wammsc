@@ -57,40 +57,53 @@ int MainpageController::readFile(QString path)
     QString ILOSC;
     QString MAGAZYN;
 
+    QString endOfFileMark = doc.cellAt(1,1)->value().toString();
+    bool endOfFileFlag = false;
+    QString currentCellValue;
+
     FileImporter import;
 
-    for(int r = 2; r<=a.rowCount(); r++){
-        for(int c = 1; c<= a.columnCount(); c++){
-            //QXlsx::Cell cell = QXlsx::CellReference(r,c);
-            QXlsx::Cell* cell = doc.cellAt(r, c);
+    int row = 3;
+    while(true){
 
-            switch(c){
+        for(int col = 1; col<= a.columnCount(); col++){
+            //QXlsx::Cell cell = QXlsx::CellReference(r,c);
+            //QXlsx::Cell* cell = doc.cellAt(row, col);
+
+            currentCellValue = doc.read(row,col).toString();
+            if(currentCellValue==endOfFileMark){
+                endOfFileFlag = true;
+            }
+
+            switch(col){
             case 1:
-                KOD_TOWARU = cell->value().toString();
+                KOD_TOWARU = currentCellValue;
                 break;
             case 2:
-                KOD_TOWARU_SKLADOWEGO = cell->value().toString();
+                KOD_TOWARU_SKLADOWEGO = currentCellValue;
                 break;
             case 3:
-                ILOSC = cell->value().toString();
+                ILOSC = currentCellValue;
                 break;
             case 4:
-                MAGAZYN = cell->value().toString();
+                MAGAZYN = currentCellValue;
                 break;
             }
         }
 
-        qDebug()<<KOD_TOWARU<<" "<<KOD_TOWARU_SKLADOWEGO<<" "<<ILOSC<<" "<<MAGAZYN;
-
         Connection::getConnection()->getDb()->transaction();
+
+        if(endOfFileFlag){
+            //commit
+            Connection::getConnection()->getDb()->commit();
+            return 0;
+        }
+
         if(!import.importRow(KOD_TOWARU,KOD_TOWARU_SKLADOWEGO,ILOSC,MAGAZYN)){
             //rollback
             Connection::getConnection()->getDb()->rollback();
-            qDebug()<<import.getErrorCode();
             return import.getErrorCode();
         }
+        row+= 1;
     }
-    //commit
-    Connection::getConnection()->getDb()->commit();
-    return 0;
 }
