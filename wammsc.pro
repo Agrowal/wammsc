@@ -1,4 +1,4 @@
-QT += quick sql
+QT += quick sql xlsx
 CONFIG += c++11
 CONFIG += c++14
 
@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     factory.cpp \
     genericfactory.cpp \
     model/loginmodel.cpp \
-    controller/logincontroller.cpp
+    controller/logincontroller.cpp \
+    fileImporter/fileimporter.cpp
 
 RESOURCES += qml.qrc
 
@@ -52,4 +53,7 @@ HEADERS += \
     factory.h \
     genericfactory.h \
     model/loginmodel.h \
-    controller/logincontroller.h
+    controller/logincontroller.h \
+    fileImporter/fileimporter.h
+
+INCLUDEPATH += excel/xlsx/qtxlsx.pri

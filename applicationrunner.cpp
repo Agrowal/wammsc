@@ -20,7 +20,6 @@ void ApplicationRunner::load(QString newPageName)
 
     m_controller->setModel(m_model);
     m_controller->setView(m_viewEngine);
-    m_controller->rootModelQuery();
     m_controller->rootController();
 
     m_controller->load();

@@ -23,14 +23,4 @@ void Controller::setView(QQmlApplicationEngine *view)
 //{
 //}
 
-// tego trzeba sie pozbyc - rejestracja typu w qml i przekazywanie wyniku getModelQuery bezposrednio do widoku
-void Controller::rootModelQuery()
-{
-    if(!setRootModelQuery){
-        SqlQueryModel* ptrQuery = _model->getQuery();
-        _view->rootContext()->setContextProperty("modelQuery",ptrQuery);
-        setRootModelQuery = true;
-    }
-}
-
 

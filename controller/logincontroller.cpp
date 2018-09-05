@@ -15,7 +15,7 @@ void LoginController::rootController()
     _view->rootContext()->setContextProperty(qmlControllerName,QVariant::fromValue(this));
 }
 
-bool LoginController::login(QString userName, QString password)
+bool LoginController::login(QString userName, QString password, QString dbName)
 {
-    return Connection::getConnection()->login(userName, password);
+    return Connection::getConnection()->login(userName, password, dbName);
 }
