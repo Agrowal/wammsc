@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     qmlRegisterType<SqlQueryModel>("io.qt.queryModel", 1, 0, "QueryModel");
+    qmlRegisterType<TreeModel>("io.qt.treeModel", 2, 0, "TreeModel");
 
     ApplicationRunner *appRunner = ApplicationRunner::getApplicationRunner();
     appRunner->load("Login");

@@ -26,6 +26,15 @@ SqlQueryModel *MainpageController::getSqlQuery()
     return _model->getQuery();
 }
 
+TreeModel *MainpageController::getTreeModel()
+{
+    TreeModel *model = new TreeModel(*_model->getQuery());
+    //usunac
+    //qDebug()<<model->rowCount();
+    qDebug()<<model->index(1,6).data().toString();
+    return model;
+}
+
 QStringList MainpageController::columnList()
 {
     QStringList acceptedColumns;

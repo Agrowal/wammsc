@@ -25,7 +25,9 @@ SOURCES += main.cpp \
     genericfactory.cpp \
     model/loginmodel.cpp \
     controller/logincontroller.cpp \
-    fileImporter/fileimporter.cpp
+    fileImporter/fileimporter.cpp \
+    treemodel/treeitem.cpp \
+    treemodel/treemodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -54,6 +56,8 @@ HEADERS += \
     genericfactory.h \
     model/loginmodel.h \
     controller/logincontroller.h \
-    fileImporter/fileimporter.h
+    fileImporter/fileimporter.h \
+    treemodel/treeitem.h \
+    treemodel/treemodel.h
 
 INCLUDEPATH += excel/xlsx/qtxlsx.pri

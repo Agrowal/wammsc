@@ -5,11 +5,12 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 
 import io.qt.queryModel 1.0
+import io.qt.treeModel 2.0
 
 Item {
     id: firstTab
 
-    property var sqlQueryModel : PageController.getSqlQuery();
+    property var sqlQueryModel : PageController.getTreeModel();
 
     anchors.fill: parent
 
@@ -26,14 +27,14 @@ Item {
             MenuItem {text: "Context menu"}
         }
 
-        TableView{
+        TreeView{
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.top: parent.top
             //anchors.bottomMargin:50
 
-            id: table_view1
+            id: tree_view1
             //            TableViewColumn  {
             //                role: "ID"
             //                title: "ID"
@@ -57,7 +58,7 @@ Item {
                 for(var i=0; i<roleList.length; i++)
                 {
                     var role  = roleList[i]
-                    temp.push(columnComponent.createObject(table_view1, { "role": role, "title": role}))
+                    temp.push(columnComponent.createObject(tree_view1, { "role": role, "title": role}))
                 }
                 return temp
             }

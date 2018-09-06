@@ -4,22 +4,31 @@ MainpageModel::MainpageModel()
 {
     const char * sqlString = R"SQL(
                              SELECT
-                             t.ID
+                             z.*
+                             from
+                             (SELECT distinct
+                             '' ID_PARENT
                              ,t.KOD
                              ,t.Nazw Nazwa
                              ,t.Kat Nr_Katalog
                              ,t.Gr Grupa
+                             ,'' Ilosc
                              ,t.MAG Magazyn
-                             ,' '
-                             ,a.KOD KOD_skladowy
-                             ,a.Nazw Nazwa_skladowy
-                             ,a.Kat Nr_Katalog_skladowy
-                             ,a.Gr Grupa_skladowy
-                             ,w.ce Ilosc_skladowy
-                             ,w.str1 Magazyn_skladowy
                              FROM
-                             firmatowary t
-                             JOIN firmaewid w ON (t.ID=w.IDzzs)
+                             firmaewid w
+                             JOIN firmatowary t ON (t.ID=w.IDzzs)
+                             ) z
+                             UNION
+                             SELECT
+                             (select t.kod from firmatowary t where t.ID=w.IDzzs) ID_PARENT
+                             ,a.KOD KOD
+                             ,a.Nazw Nazwa
+                             ,a.Kat Nr_Katalog
+                             ,a.Gr Grupa
+                             ,w.ce Ilosc
+                             ,w.str1 Magazyn
+                             FROM
+                             firmaewid w
                              JOIN firmatowary a ON (a.Kod=w.IDp AND a.MAG = w.str1)
                              )SQL";
 

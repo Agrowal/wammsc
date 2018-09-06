@@ -9,7 +9,7 @@ bool FileImporter::warehouseOk(QString magazyn)
 {
             QSqlQuery query;
             query.prepare("SELECT ID FROM firmadefs WHERE Pole='MG' and Nazw='mag2' = :MAGAZYN");
-            query.bindValue(0,kod_towaru);
+            query.bindValue(0,magazyn);
             query.exec();
             while(query.next()){
                 return true;
